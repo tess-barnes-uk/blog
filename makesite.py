@@ -209,23 +209,23 @@ def main():
 
     # Create blogs.
 
-    blog_posts = make_pages('content/blog/*',
-                            '_site/blog/{{ slug }}/index.html',
-                            post_layout, blog='blog', **params)
+    tech_posts = make_pages('content/tech/*',
+                            '_site/tech/{{ slug }}/index.html',
+                            post_layout, blog='tech', **params)
     
     # news_posts = make_pages('content/news/*',
     #                         '_site/news/{{ slug }}/index.html',
     #                         post_layout, blog='news', **params)
 
     # Create blog list pages.
-    make_list(blog_posts, '_site/blog/index.html',
-              list_layout, item_layout, blog='blog', title='Blog', **params)
+    make_list(tech_posts, '_site/tech/index.html',
+              list_layout, item_layout, blog='tech', title='Tech Blog', **params)
     # make_list(news_posts, '_site/news/index.html',
     #           list_layout, item_layout, blog='news', title='News', **params)
 
     # Create RSS feeds.
-    make_list(blog_posts, '_site/blog/rss.xml',
-              feed_xml, item_xml, blog='blog', title='Blog', **params)
+    make_list(tech_posts, '_site/tech/rss.xml',
+              feed_xml, item_xml, blog='tech', title='Tech Blog', **params)
     # make_list(news_posts, '_site/news/rss.xml',
     #           feed_xml, item_xml, blog='news', title='News', **params)
 
