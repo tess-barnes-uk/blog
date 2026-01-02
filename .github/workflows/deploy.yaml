@@ -1,0 +1,26 @@
+name: Deploy via ftp
+on: 
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Generate Site
+      run: |
+        mkdir _site
+        echo "testing" > _site/test.txt
+        python --version || true
+        python3 --version || true
+
+
+    - name: Upload ftp
+      uses: sebastianpopp/ftp-action@releases/v2
+      with:
+        host: ${{ secrets.FTP_SERVER }}
+        user: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PWD }}
+        localDir: "_site"
+        remoteDir: "."
+        options: " --asci"
