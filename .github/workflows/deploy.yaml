@@ -9,11 +9,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Generate Site
       run: |
-        mkdir _site
-        echo "testing" > _site/test.txt
-        python --version || true
-        python3 --version || true
-
+        python pip install -r requirements.txt
+        make site
+        ls ./_site
 
     - name: Upload ftp
       uses: sebastianpopp/ftp-action@releases/v2
@@ -21,6 +19,6 @@ jobs:
         host: ${{ secrets.FTP_SERVER }}
         user: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PWD }}
-        localDir: "_site"
+        localDir: "./_site"
         remoteDir: "."
-        options: " --asci"
+        options: "--delete --asci"
