@@ -1,0 +1,47 @@
+ <!-- title: Scout rules still apply -->
+
+<p>This week I was asked a flattering question by a colleague during a mutual buddy chat. He asked: </p>
+<blockquote >
+<p>when you work with junior (sic) developers in a workshop and report back a positive learning to the group, are you genuinely finding value or just supporting the learning setting?</p>
+</blockquote>
+
+<p>In thinking about this I realised how much has changed in the last 3 years. </p>
+<p>I can now admit I am rubbish at dissembling. </p>
+<p>I can also find huge value in working with all levels via an "again for the first time" approach, an approach I use every day. It's refreshing to meet today-colleague as a new person and today-challenge as new too. </p>
+<p>Is this a new topic for some?</p>
+<p>This week I had the pleasure of facilitating an ensemble programming session for a quartet. It was their first time working in this way but they'd heard it might be worth trying. The knowledge gaps between the participants could not have been larger: highly experienced through to apprentice.</p>
+<p>On Tuesday, in the first 30 mins they learned </p>
+<ul>
+    <li>the roles: typist, navigator, support (and facilitator)</li>
+    <li>the timing: 5 minute rotations and a break every full cycle</li>
+    <li>patience to talk to each other and really listen to each other</li>
+    <li>slowing down to the slowest speed was good to share knowledge</li>
+</ul>
+<p>After that they wanted to try it for a full morning.</p>
+<p>After the morning session they said they could see the real value of using ensemble working to bring everyone up to speed quicker: apprentices, new starters and late joiners to projects already in flight.</p>
+<p>They spotted and fixed a number of bugs that had been missed before; scouts rules we naturally brought into play.</p>
+
+<p>The apprentice had asked more questions, and had been able to play as navigator for the first time; this was a massive confidence boost.</p>
+<p>On Thursday, the team retro was full of positive comments about the experience.</p>
+<p>On Friday, one of the quartet asked me for the link to the tool I'd been using to keep track of rotations and timing. They want to run more sessions like this themselves, not all the time, but at least several a week. I couldn't be happier.</p>
+<p>Apart from thinking ahead and finding collaborators for coaching and facilitation sessions early next year, this week has been mostly hands on coding.</p>
+
+<p>I realise I miss weeks like this. There is something really satisfying in adding small features or fixing bugs and taking the opportunity to clean things up as I go along. Cleaning up can mean:</p>
+<ul>
+    <li>Checking base image versions in docker files</li>
+    <li>Bumping the package management version (e.g. bundler for ruby world)</li>
+    <li>Curating dependency chains</li>
+    <li>Getting the project ready for dependabot or renovate to help with dependancies</li>
+    <li>Considering a rename or split for a method that does more than it used to</li>
+    <li>DRY-ing up code where we now repeat ourselves more than twice</li>
+    <li>Adding a couple of tests for edge cases</li>
+</ul>
+<p>It's important to think about a few things when you decide how much to do at once. It is possible to creep all the scope and get into an update that should be its own story.</p>
+<ul>
+<li>Do you have an automated test suite? what about build and integration pipelines?</li>
+<li>How far are dependancies behind? Will we cross into breaking changes territory?</li>
+<li>Is the project in sunset i.e. deprecated and mostly replaced</li>
+</ul>
+
+<p>Doing some clean up as "small changes and often" really helps stay up to date. The longer we leave it, the more it piles up and the harder it is to face, and to tackle.</p>
+<p>I first heard about "Code Scout Rules" or "Boy Scout Rules" in a talk given back in 2015 by <a href="https://phpboyscout.uk/author/matt/">Matt Cockayne</a> and it's still just as important as ever to leave the codebase better than you found it.</p>

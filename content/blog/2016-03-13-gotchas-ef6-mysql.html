@@ -1,0 +1,102 @@
+<!-- title: Tips for running Entity Framework (6) and MySQL / Maria -->
+
+<p>My first forays into running Entity Framework with MySQL have been entertaining to say the least. Each challenge seems to have followed the next and required a fair bit of research to solve so I thought it was worth compiling them all into one blog post. It's an aide memoir for me and if it helps you readers out too, all the better!</p>
+<h2>bit vs tinyint for booleans</h2>
+
+<p>By default, EF will handle booleans as tinyint under the hood as MySQL in general has no built in concept of true | false other than 1 | 0 and uses tinyint(1) as a substitute.&nbsp;However, tinyint gets treated as <a href="https://www.devart.com/dotconnect/mysql/docs/datatypemapping.html" target="_blank" rel="noopener">byte</a> rather than bit by EF so it's all a 'bit' confusing (ahem, sorry)... Luckily,&nbsp;there is an easy code fix.</p>
+<h3>symptoms</h3>
+
+<p>Error messages usually seen in this case:</p>
+<div style="font-size:clamp(14px, .875rem, 21px);line-height:clamp(20px, 1.25rem, 30px)">
+<pre class="shiki" style="background-color: #2e3440ff">
+<code>
+    <span class="line"><span style="color: #D8DEE9FF">System.FormatException: String was not recognized as a valid Boolean..</span></span>
+</code>
+</pre>
+</div>
+
+<h3>fix</h3>
+
+<p>Add this to your database Context&nbsp;code:</p>
+<div style="font-size:clamp(14px, .875rem, 21px);line-height:clamp(20px, 1.25rem, 30px)">
+<pre class="shiki" style="background-color: #2e3440ff">
+<code>
+    <span class="line"><span style="color: #D8DEE9">modelBuilder</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">Properties</span><span style="color: #ECEFF4">()</span></span>
+    <span class="line"><span style="color: #D8DEE9FF">            </span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">Where</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9FF">x </span><span style="color: #81A1C1">=&gt;</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">x</span><span style="color: #ECEFF4">.</span><span style="color: #D8DEE9">PropertyType</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">==</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">typeof</span><span style="color: #ECEFF4">(</span><span style="color: #81A1C1">bool</span><span style="color: #ECEFF4">))</span></span>
+    <span class="line"><span style="color: #D8DEE9FF">            </span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">Configure</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9FF">x </span><span style="color: #81A1C1">=&gt;</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">x</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">HasColumnType</span><span style="color: #ECEFF4">(</span><span style="color: #ECEFF4">&quot;</span><span style="color: #A3BE8C">bit</span><span style="color: #ECEFF4">&quot;</span><span style="color: #ECEFF4">))</span><span style="color: #81A1C1">;</span></span>
+</code>
+</pre>
+</div>
+
+<h2>inheritance</h2>
+
+<p>Unlike with MSSQL, when using EF6 with MySQL, only one entity in the hierarchy can be concrete - the leaf. This can have implications for your design if you have complex similar entities and want to abstract out those things they share in common.</p>
+<h3>symptoms</h3>
+
+<p>Error messages usually seen in this case:</p>
+<div style="font-size:clamp(14px, .875rem, 21px);line-height:clamp(20px, 1.25rem, 30px)">
+<pre class="shiki" style="background-color: #2e3440ff">
+<code>
+    <span class="line"><span style="color: #D8DEE9FF">The EntitySet &#39;CClass&#39; is not defined in the EntityContainer &#39;TestContext&#39;</span></span>
+</code>
+</pre>
+</div>
+
+<h3>fix</h3>
+
+<ul>
+<li>Redesign</li>
+</ul>
+
+<p>In a hierarchy such as<br>MailBox &lAarr; ExchangeMailBox &lAarr; Exchange2016MailBox<br>only Exchange2016MailBox can be concrete</p>
+<ul>
+<li>Manually&nbsp;map inherited fields to the table in your Context via&nbsp;the OnModelCreating method using</li>
+</ul>
+
+<div style="font-size:clamp(14px, .875rem, 21px);line-height:clamp(20px, 1.25rem, 30px)">
+<pre class="shiki" style="background-color: #2e3440ff">
+<code>
+    <span class="line"><span style="color: #D8DEE9">modelBuilder</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">Entity</span><span style="color: #ECEFF4">().</span><span style="color: #88C0D0">Map</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9FF">m </span><span style="color: #81A1C1">=&gt;</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">m</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">MapInheritedProperties</span><span style="color: #ECEFF4">()).</span><span style="color: #88C0D0">ToTable</span><span style="color: #ECEFF4">(</span><span style="color: #ECEFF4">&quot;</span><span style="color: #A3BE8C">Employee</span><span style="color: #ECEFF4">&quot;</span><span style="color: #ECEFF4">)</span><span style="color: #81A1C1">;</span></span>
+</code>
+</pre>
+</div>
+
+<h2>unique indexes</h2>
+
+<p>Where the design calls for a unique index on a varchar&nbsp;field (e.g. email address) this can be inhibited by strong internal database limits. For the unique index to work on MySQL, there is a max length that must be applied to the field. The exact value is dependent on the collation and database engine&nbsp;used and relates to an underlying byte value.</p>
+<ul>
+<li>MyISAM allows keys of length 1000 bytes.</li>
+
+<li>InnoDB&nbsp;allows keys of length 767 bytes.</li>
+</ul>
+
+<p>On ascii (latin-1), characters are assumed to be stored as 1 byte, giving varchar(767) or above.&nbsp;However, UTF8 collations will store a char in between 1 and 3 bytes. Expect to be able to use max varchar(254).</p>
+<p>For keys with collation <a href="http://stackoverflow.com/questions/6172798/mysql-varchar255-utf8-is-too-long-for-key-but-max-length-is-1000-bytes">utf8mb4</a>&nbsp;or <a href="http://wildlyinaccurate.com/mysql-specified-key-was-too-long-max-key-length-is-767-bytes/">UTF-16</a>, the byte length per character is assumed as 4 bytes allowing a maximum of varchar(250) on MyISAM or varchar(190) on InnoDB.</p>
+<h3>symptoms</h3>
+
+<p>Error messages usually seen in this case:</p>
+<div style="font-size:clamp(14px, .875rem, 21px);line-height:clamp(20px, 1.25rem, 30px)">
+<pre class="shiki" style="background-color: #2e3440ff">
+<code>
+    <span class="line"><span style="color: #D8DEE9FF">Specified key was too long; max key length is 767 bytes</span></span>
+</code>
+</pre>
+</div>
+
+<h3>fix</h3>
+
+<ul>
+<li>consider changing your collation; does your internalisation policy require UTF-16 or only UTF-8?</li>
+
+<li>consider changing your database engine - loads of StackOverflow articles address this InnoDB vs MyISAM debate, there's even an article on <a href="https://en.wikipedia.org/wiki/Comparison_of_MySQL_database_engines" target="_blank" rel="noopener">wikipedia</a> (to be read with the appropriate level of salt)</li>
+
+<li>enforce the appropriate maximum length</li>
+
+<li>enforce uniqueness programatically (and trust&nbsp;you don't miss a use case in the code base)</li>
+</ul>
+
+<h2>performance issues</h2>
+
+<p>Although Entity Framework 6 supports the <em>Find</em>&nbsp;linq method it is not performant and leads to some very inefficient sql query creation under the hood. Big performance improvements can be made by using <em>Single</em>&nbsp;or <em>SingleOrDefault</em> instead.</p>
+<p>If you have a complex hierarchy of entities it's worth considering the question of database policy Table-Per-Heirarchy vs Table-Per-Type. There are <a href="http://stackoverflow.com/questions/24449231/entity-framework-6-code-first-what-is-the-best-implementation-for-a-baseobject">good articles</a> out there <a href="http://blog.devart.com/table-per-type-vs-table-per-hierarchy-inheritance.html">explaining the difference</a> and suggesting that TPH provides better performance, particularly on Entity Framework. It makes use of a discriminator column which brings its own design &nbsp;<a href="http://dba.stackexchange.com/questions/71789/inheritance-discriminator-column-better-int-or-varchar-or-enum">decisions</a>. Historically there have been reports of issues with discriminator columns in earlier releases of EF6 but these appear to have been <a href="https://bugs.mysql.com/bug.php?id=63920">fixed</a>.</p>
+<p>Beyond that changing the underlying database&nbsp;to MSSQL or adopting a different&nbsp;ORM may be your only options. Looking ahead, EF7 does not yet support MySQL and no one knows when Oracle will change this so it's worth investigating other solutions.</p>
