@@ -182,11 +182,11 @@ def main():
         'current_year': datetime.datetime.now().year
     }
 
-    params['images_path'] = f'{params['base_path']}/images'
-
     # If params.json exists, load it.
     if os.path.isfile('params.json'):
         params.update(json.loads(fread('params.json')))
+
+    params['images_path'] = f'{params['base_path']}/images'
 
     # Load layouts.
     page_layout = fread('layout/page.html')
