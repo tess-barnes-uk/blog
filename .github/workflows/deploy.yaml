@@ -11,6 +11,8 @@ jobs:
     - name: Generate Site
       run: |
         pip install -r requirements.txt
+        rm params.json
+        mv params.ci.json params.json
         make site
         ls ./_site
 
