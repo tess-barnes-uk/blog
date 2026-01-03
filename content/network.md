@@ -18,6 +18,7 @@ People who inspire me to change
 
 - Jason Gorman
 - Clare Sudbery
+- Will Gibson (not that author)
 - Charity Major
 - Dr J Harrison
 - Russ Miles
@@ -26,6 +27,7 @@ People who inspire me to change
 - Jools Dobson
 - Nathan W. Pyle
 - Ian Cooper
+- Stuart Herbert
 - Tim Ottinger
 - Catherine Day
-
+- William Gibson (that author)
