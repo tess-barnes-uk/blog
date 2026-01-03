@@ -11,7 +11,7 @@ class FileIOTest(unittest.TestCase):
 
     def test_fread(self):
         text = 'foo\nbar\n'
-        filepath = path.temppath('foo.txt')
+        filepath = path.temppath('foo.htm')
         with open(filepath, 'w') as f:
             f.write(text)
         text_read = makesite.fread(filepath)
@@ -20,7 +20,7 @@ class FileIOTest(unittest.TestCase):
 
     def test_fwrite(self):
         text = 'baz\nqux\n'
-        filepath = path.temppath('foo.txt')
+        filepath = path.temppath('foo.htm')
         makesite.fwrite(filepath, text)
         with open(filepath) as f:
             text_read = f.read()
@@ -30,7 +30,7 @@ class FileIOTest(unittest.TestCase):
     def test_fwrite_makedir(self):
         text = 'baz\nqux\n'
         dirpath = path.temppath('foo', 'bar')
-        filepath = os.path.join(dirpath, 'foo.txt')
+        filepath = os.path.join(dirpath, 'foo.htm')
         makesite.fwrite(filepath, text)
         with open(filepath) as f:
             text_read = f.read()

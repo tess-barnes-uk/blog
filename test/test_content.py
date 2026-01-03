@@ -9,11 +9,11 @@ from test import path
 class ContentTest(unittest.TestCase):
     def setUp(self):
         self.blog_path = path.temppath('blog')
-        self.undated_path = os.path.join(self.blog_path, 'foo.txt')
-        self.dated_path = os.path.join(self.blog_path, '2018-01-01-foo.txt')
-        self.normal_post_path = os.path.join(self.blog_path, 'baz.txt')
+        self.undated_path = os.path.join(self.blog_path, 'foo.htm')
+        self.dated_path = os.path.join(self.blog_path, '2018-01-01-foo.htm')
+        self.normal_post_path = os.path.join(self.blog_path, 'baz.htm')
         self.md_post_path = os.path.join(self.blog_path, 'qux.md')
-        self.no_md_post_path = os.path.join(self.blog_path, 'qux.txt')
+        self.no_md_post_path = os.path.join(self.blog_path, 'qux.htm')
 
         os.makedirs(self.blog_path)
 

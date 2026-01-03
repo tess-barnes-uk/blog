@@ -9,8 +9,8 @@ class PathTest(unittest.TestCase):
         self.assertTrue(path.temppath())
 
     def test_move_existing_file(self):
-        src = os.path.join(path.temppath(), 'foo.txt')
-        dst = os.path.join(path.temppath(), 'bar.txt')
+        src = os.path.join(path.temppath(), 'foo.htm')
+        dst = os.path.join(path.temppath(), 'bar.htm')
         with open(src, 'w') as f:
             f.write('foo')
 
@@ -26,15 +26,15 @@ class PathTest(unittest.TestCase):
         self.assertEqual(text, 'foo')
 
     def test_move_missing_file(self):
-        src = os.path.join(path.temppath(), 'foo.txt')
-        dst = os.path.join(path.temppath(), 'bar.txt')
+        src = os.path.join(path.temppath(), 'foo.htm')
+        dst = os.path.join(path.temppath(), 'bar.htm')
         path.move(src, dst)
         self.assertFalse(os.path.isfile(src))
         self.assertFalse(os.path.isfile(dst))
 
     def test_move_file_cleanup(self):
-        src = os.path.join(path.temppath(), 'foo.txt')
-        dst = os.path.join(path.temppath(), 'bar.txt')
+        src = os.path.join(path.temppath(), 'foo.htm')
+        dst = os.path.join(path.temppath(), 'bar.htm')
         with open(dst, 'w') as f:
             f.write('foo')
         path.move(src, dst)
@@ -43,9 +43,9 @@ class PathTest(unittest.TestCase):
 
     def test_move_existing_dir(self):
         src = os.path.join(path.temppath(), 'foo')
-        srcf = os.path.join(src, 'foo.txt')
+        srcf = os.path.join(src, 'foo.htm')
         dst = os.path.join(path.temppath(), 'bar')
-        dstf = os.path.join(dst, 'foo.txt')
+        dstf = os.path.join(dst, 'foo.htm')
 
         os.makedirs(src)
         with open(srcf, 'w') as f:
