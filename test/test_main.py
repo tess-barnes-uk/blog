@@ -28,48 +28,53 @@ class MainTest(unittest.TestCase):
         makesite.main()
         self.assertFalse(os.path.isfile('_site/foo.htm'))
 
-    @unittest.skip('brittle')
+    # @unittest.skip('brittle')
     def test_default_params(self):
+        shutil.move('test/2018-01-01-proin-quam.html', 'content/tech/')
         makesite.main()
 
-        with open('_site/blog/proin-quam/index.html') as f:
+        with open('_site/tech/proin-quam/index.html') as f:
             s1 = f.read()
 
-        with open('_site/blog/rss.xml') as f:
+        with open('_site/tech/rss.xml') as f:
             s2 = f.read()
 
         shutil.rmtree('_site')
+        shutil.move('content/tech/2018-01-01-proin-quam.html', 'test')
 
         self.assertIn('<a href="/">Home</a>', s1)
         self.assertIn('<title>Proin Quam - Lorem Ipsum</title>', s1)
         self.assertIn('Published on 2018-01-01 by <b>Admin</b>', s1)
 
         self.assertIn('<link>http://localhost:8000/</link>', s2)
-        self.assertIn('<link>http://localhost:8000/blog/proin-quam/</link>', s2)
+        self.assertIn('<link>http://localhost:8000/tech/proin-quam/</link>', s2)
 
-    @unittest.skip('brittle')
+    # @unittest.skip('brittle')
     def test_json_params(self):
         params = {
             'base_path': '/base',
             'subtitle': 'Foo',
             'author': 'Bar',
-            'site_url': 'http://localhost/base'
+            'site_url': 'http://localhost'
         }
         with open('params.json', 'w') as f:
             json.dump(params, f)
+        
+        shutil.move('test/2018-01-01-proin-quam.html', 'content/tech/')
         makesite.main()
 
-        with open('_site/blog/proin-quam/index.html') as f:
+        with open('_site/tech/proin-quam/index.html') as f:
             s1 = f.read()
 
-        with open('_site/blog/rss.xml') as f:
+        with open('_site/tech/rss.xml') as f:
             s2 = f.read()
 
         shutil.rmtree('_site')
+        shutil.move('content/tech/2018-01-01-proin-quam.html', 'test')
 
         self.assertIn('<a href="/base/">Home</a>', s1)
         self.assertIn('<title>Proin Quam - Foo</title>', s1)
         self.assertIn('Published on 2018-01-01 by <b>Bar</b>', s1)
 
         self.assertIn('<link>http://localhost/base/</link>', s2)
-        self.assertIn('<link>http://localhost/base/blog/proin-quam/</link>', s2)
+        self.assertIn('<link>http://localhost/base/tech/proin-quam/</link>', s2)
