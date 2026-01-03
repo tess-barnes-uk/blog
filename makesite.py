@@ -175,10 +175,9 @@ def main():
 
     # Default parameters.
     params = {
-        'base_path': '/blog',
-        'subtitle': 'Wide ranging ramblings of a female geek',
-        'author': 'Tess',
-        'render': 'yes',
+        'base_path': '',
+        'subtitle': 'Lorem Ipsum',
+        'author': 'Admin',
         'site_url': 'http://localhost:8000',
         'current_year': datetime.datetime.now().year
     }
@@ -203,6 +202,8 @@ def main():
 
     # Create site pages.
     make_pages('content/_index.html', '_site/index.html',
+               page_layout, **params)
+    make_pages('content/_404.html', '_site/404.html',
                page_layout, **params)
     make_pages('content/[!_]*.*', '_site/{{ slug }}/index.html',
                page_layout, **params)
