@@ -1,0 +1,6 @@
+<!-- title: Pausing for thought -->
+Birthdays are always a good excuse for pausing, taking stock and checking life is still on the path you've chosen. For fun, and also because I am a curious soul that cares about what other people think and how they measure me, I did a Myers-Briggs test again today.
+
+Apparently, according to my results my most likely careers are writing and counselling and the most important facet of a job for me is how meaningful it is. I find this very interesting in the light of two observations of my early life I had believed for a very long time: that I am a selfish person and that writers must have something to write about.
+
+Times have changed since I first heard those comments, there is an influence on writing styles which has evolved, insisting that 800 words is enough for anyone in one sitting, one must assume that the reader has no attention span and that only one sentence should be used in a paragraph. In addition it seems anyone can write about anything so not having anything meaningful to write about is no longer a barrier. I'm not sure I agree with the turn writing is taking but in my selfish need for permission to write I'm going to take it and run!
