@@ -3,7 +3,7 @@ This last week has been a lesson in frustration - changing requirements, depende
 
 These things have always lit a fire under my calm exterior and left me wanting to scream, throw the laptop out of the window and snap at all my colleagues who only want to help. 
 
-![slightly frustrated there]({{ images_path }}/Frustrated-300x200.jpg "Daily activity")
+![slightly frustrated there: man shouting at laptop](/blog/images/Frustrated-300x200.jpg "Daily activity: frustrated man shouting at laptop")
 
 This week was different and it's a strange (and wonderful) new world.
 
