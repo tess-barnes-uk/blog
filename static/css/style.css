@@ -12,6 +12,28 @@ body {
     font-family: helvetica, arial, sans-serif;
 }
 
+pre, xmp {
+    padding: 1em;
+    font-family: monospace;
+    font-size: 1.1em;
+    text-wrap-mode: wrap;
+    color: #F2B721;
+    background-color: #2b2b2b;
+}
+
+table {
+    width: fit-content;
+    min-width: 40em;
+}
+
+table, th, td {
+    border: 1px solid #777777;
+}
+td, th {
+    padding: 1em;
+    line-height: 1.2em;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -42,6 +64,31 @@ nav section, header section, main, footer section {
     padding: 0 0.5em;
 }
 
+/* For devices with a minimum width of 768px (Medium) */
+@media screen and (min-width: 768px) {
+  table {
+    max-width: 50em;
+  }
+  nav section, header section, main, footer section {
+    max-width: 50em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5em;
+}
+}
+
+/* For devices with a minimum width of 992px (Large) */
+@media screen and (min-width: 992px) {
+  table {
+    max-width: 60em;
+  }
+  nav section, header section, main, footer section {
+    max-width: 60em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5em;
+}
+}
 
 /* Navigation panel */
 nav {

@@ -1,0 +1,23 @@
+<!-- title: Displaying html code listings in your blog -->
+<p>I've long admired technical bloggers who spout seemingly reams of code listings to illustrate and support their blog articles, whatever the subject.</p> 
+
+<p>My recent forays into testing html5 and reporting the findings has lead me to want to produce my own listings. Really simple I thought, just dump the plain text from the source between two &lt;code> tags and hey presto, one listing. Um... No, not quite that simple. It works fine for css - it's considered plain text unless found in the &lt;head> of a document between &lt;style> tags. Html, however, is more tricky as the browser wants to render it &lt;code> tags or no &lt;code> tags.</p>
+
+<p>Veteran code geeks may laugh and point at my obvious stupidity but I can honestly say it was only after several frustrating minutes of forum searches that the doh! moment struck and I remembered html entities.</p>
+
+<p>So for anyone else out there bashing their head on this seemingly simple conundrum here's the solution:</p>
+
+<ol>
+	<li>type or paste your html code into your favourite blog software between &lt;code> tags</li>
+	<li>change every &amp; to &amp;amp;</li>
+	<li>then change every &lt; to &amp;lt;</li>
+</ol>
+<p>If you fancy showing the line numbers as well you can always mark up each line as a line item &lt;li> within an ordered list &lt;ol>.</p>
+
+<p>Simple - now I know that is...  </p>
+
+<p>... happy code listing!</p>
+
+<h2>Update from future Tess in 2025</h2>
+<p>For shorter blog page html and fewer ampesands &lt;code> tags cover your inline needs, while for multi-line epics you can always revive the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/xmp">little known</a> (and contentious) &lt;xmp> tag. </p>
+<p>Line numbers need to be added manually in this method but honestly if your listing is that long, a link to your open code repository, or gist, is better.</p>

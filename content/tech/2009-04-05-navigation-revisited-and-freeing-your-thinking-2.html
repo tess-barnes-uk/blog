@@ -1,0 +1,51 @@
+<!-- title: Navigation revisited and freeing your thinking -->
+<h3>Revisiting Navigation</h3>
+<p>Last month I set out <a href="{{ base_path }}/html-markup-for-navigation/">my view</a> of using <code>&lt;nav&gt;</code> and <code>&lt;ul&gt;</code>s for navigation purposes. This was as a reaction to feelings in the php development community against changing the default behaviour of <code>&lt;ul&gt;</code>s using css.</p>
+
+<p>The message that came across clearly after the fact was: the objection was not to the use of <code>&lt;ul&gt;</code>s as parent elements for a list of links. The problem comes with the styling:</p>
+<code>/*css seen as a problem */
+ul {text-align:center;list-style-type:none;}
+li{float:left;}
+a{display:block;padding:2px 5px;}
+</code>
+<p>The problem is that default behaviour for all &lt;ul&gt;s is changed so <code>&lt;ul&gt;</code>s elsewhere in the page will be styled like this.</p>
+
+<code>/*css seen as a reasonable solution */
+nav ul{text-align:center;list-style-type:none;}
+nav li {float:left;}
+nav a{display:block;padding:2px 5px;}</code>
+
+<p>Just the behaviour for children of the <code>&lt;nav&gt;</code> element is changed leaving other <code>&lt;ul&gt;</code>s to be styled differently (or defaultly).</p>
+
+<p>This is a really subtle distinction and I don't mind admitting it took me a while to sus out. The argument isn't against using <code>&lt;ul&gt;</code>s in navigation but advises us to do so in a careful and considered way.</p>
+
+<p>Not using <code>&lt;ul&gt;</code>s closes the door to such enhancements as submenus and accordian style menu layout. This shows up my intial example last month, at best, as being oversimplistic and a bit naive.</p>
+
+<h3>Jumping to Conclusions</h3>
+
+<p>It's not the first time in my life I've jumped to a conclusion. Another I've revisited recently can be succinctly summed up in a sentence from <cite>PHP in Action</cite>:</p>
+<blockquote>Alternatively, we could achieve the same effect with Javascript, but it's better to avoid Javascript if we can, since some users disable it in their browsers.</blockquote>
+<p>Reading this recently initially reinforced my long held belief that Javascript is Bad because some users disable it.</p>
+
+<p>The desired effect mentioned in the quote from <cite>PHP in Action</cite> is getting submit buttons to generate individual commands where there are multiple submit buttons in a form. The authors go on to suggest solutions in javascript which work where there is already javascript present in the form so they aren't really saying Javascript is Bad <em>so Don't Ever Use It</em>.</p>
+
+<p>I first hit the 'Javascript is Bad' assumption in accessibility and coding circles in about 2003 when the numbers of users with disabled javascript were about 20% (based on visitors to W3C at the time). As a result of taking it for granted I spent six years not bothering to learn much javascript because it's Bad.</p>
+
+<p>What a waste!</p>
+
+<h3>The Real Lesson</h3>
+
+<p>I am quickly working to fill this ridiculous hole in my knowledge, with the understanding that javascript should be used with care, for tasks where it is the best fit and always ensuring that all the functionality of the site is still there if a user should have javascript turned off or uses a screenreader.</p>
+
+<p>The lessons here are ones I've taken a while to learn and they are relevant to coding and most things in life, I hope this blog post helps others learn them quicker:</p>
+
+<ul>
+	<li>Conclusions drawn, even by the 'wise men' in a community should never be taken on their own, as gospel.</li>
+	<li>Always check the date of a resource if you can.</li>
+	<li>Do your own tests.</li>
+	<li>Join in discussions and check your view against that of others.</li>
+	<li>Go back and review your own conclusions after time, has anything changed? new techniques or technology been released? did you jump the gun?</li>
+	<li>Never be afraid to admit you would change your mind (even if it's only to yourself).</li>
+	<li>Never be afraid to try something new.</li>
+</ul>
+<p>Is there anything you don't agree with? have I missed something? what assumptions have you challenged recently (your own or from others)?</p>

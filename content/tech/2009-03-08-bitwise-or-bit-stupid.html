@@ -1,0 +1,68 @@
+<!-- title: Bitwise or bit stupid? -->
+<p>I'll hold my hand up right now and confess to being bit stupid, I was really disappointed with my score in a recent php proficiency test and most of my downfall was bitwise operators (the rest was array functions I'd never needed to use before and I'll tackle that in another post).</p>
+
+<h3>So what's all the fuss about?</h3><!--more-->
+<p>I've never learnt about bitwise operators because I'd never seen a practical use. I knew of their existence in a vague etherial sense but thought they were historical like other direct interaction with binary - punchcards or machine code for instance. Maybe they might be needed in embedded systems - not something I'd ever thought of getting into. PHP (personal home page as it started out) is after all a web coding language.</p>
+
+<p>Luckily I know one or two c++ software engineers (including the Other Half) who were patient enough to explain bitwise operators in clearer terms than the php manual. The practical uses are still fairly limited in my view so please point out others to me via Mastodon if you feel kind or want to put me straight.</p>
+
+<h3>Case Study: Checking whether an iterator is odd or even:</h3>
+<p>So you want to make your data table rows alternate between two styles?</p>
+<p>As there is no <code>is_odd()</code> function built into php, before being bitwise I would have used something like: -</p>
+
+<code>
+<ol>
+<li>&lt;table></li>
+<li>&lt;?php</li>
+<li>for ($i=0;$<=$tableRows;$++) { </li>
+<li>if (!is_int($i/2)) {?></li>
+<li>&lt;tr class="row1"></li>
+<li>&lt;?php</li>
+<li>} else {?></li>
+<li>&lt;tr class="row2"></li>
+<li>&lt;?php }</li>
+<li>?></li>
+<li>&lt;/table></li>
+</ol>
+</code>
+
+<p>Now I know I can check the least significant bit to see if it is set or not. This will tell me if $i is odd or even by using following code in line 4 above:</p>
+<code>
+if ($i & 1) {?>
+</code>
+
+<p>Two days ago I would have said huh? so here's a bit of explanation:</p>
+
+<p>Say at a point in the loop $i = 7. This would make our line 4 equivalent to <code>if (7 & 1)</code>
+&amp; is the bitwise 'and' operator and my binary logic is still a little sketchy but there is a nice clear entry on <a href="http://en.wikipedia.org/wiki/Bitwise_operation#AND">bitwise operation on wikipedia</a> to help you understand how we achieved the numbers in the following table. </p>
+<p>Lets have an example:</p>
+
+<table caption="How to calculate 'and' in binary">
+<thead>
+<tr><th></th><th>Integer</th><th>4th bit (8's)</th><th>3rd bit (4's)</th><th>2nd bit (2's)</th><th>1st bit (1's)</th></tr>
+</thead>
+<tbody>
+<tr><td>First arg</td><td>7</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>Second arg</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>Answer</td><td>1 (TRUE = is odd)</td><td>0</td><td>0</td><td>0</td><td><b>1</b></td></tr>
+</tbody>
+</table>
+
+<p>I've done a timing test and here is the concluding output:</p>
+
+
+
+<blockquote>
+<pre>
+conclusion: using bitwise operators take longer
+
+is_int method: 8.29696655273E-5 secs
+bitwise method: 0.000131130218506 secs
+</pre>
+</blockquote>
+
+<p>So it definitely works just the same and does not need any extra code. However, as part of a local lamp environment and in this case, the bitwise operation code doesn't take less time as advertised but more! I'm sure in a compiled solution it would make a big difference but not on the average website.
+Don't take my word for it though, test it on your own system.</p>
+
+<p>Perhaps there is a more complicated problem out there that bitwise operations can solve more efficiently?</p>
+

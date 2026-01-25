@@ -8,7 +8,7 @@ I saw this as: convert .csv file to sql file then use phpMyAdmin to process sql 
 The simplest way to see this is actually:
 get data from .csv file into database using phpmyadmin as database access.
 
-The difference might be subtle but my first solution was a quite a bit more complex.<!--more-->
+The difference might be subtle but my first solution was a quite a bit more complex.
 
 First - convert from csv to sql
 1) log into phpMyAdmin and export existing data table as sql. This gives the table structure and the fieldnames. (saved locally as export.sql). Amend export.sql to remove the values from the insert query and ensure that the table creation part of the script includes 'IF NOT EXISTS' or is deleted.

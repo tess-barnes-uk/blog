@@ -1,0 +1,12 @@
+<!-- title: Fixing footer styling -->
+<p>Happily I appear to have fixed the issue with footer styling as detailed in my last post. Oh to have such an easy answer to all my problems!</p>
+
+<p>The addition of <code>{display:block;}</code> to the css told the browser (in this case firefox 3.0.6) what sort of element &lt;footer> is and therefore how it should be dealt with.</p>
+<p>Result - display as originally expected:</p>
+
+<figure>
+<img src="{{ images_path }}/expected-ff.gif" alt="screen shot of firefox 3.0.6" title="expected-ff" width="570" height="156" class="size-full wp-image-56" />
+<figcaption>screen shot of firefox 3.0.6 showing expected result</figcaption>
+</figure>
+
+<p>Big thanks to <a href="http://www.brucelawson.co.uk/">Bruce</a> and <a href="http://dbaron.org/">David</a> for pointing out this simple but effective solution.</p>

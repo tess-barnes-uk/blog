@@ -1,0 +1,66 @@
+<!-- title: Do not adjust your set it's just HTML5 -->
+I'm lazy by nature and the less I have to type to get something working the better. This is what attracted me to HTML in the first place: meaningful tags reducing the need for div-itis. Adoption by the browser manufacturers seems to continue at their own pace (whatever that really means) and in the mean time something I expected to look like this:
+
+<figure>
+<img src="{{ images_path }}/expected-ff.gif" alt="screen shot of firefox 3.0.6" title="expected-ff" width="570" height="156" />
+<figcaption>screen shot of firefox 3.0.6</figcaption></figure>
+
+well lets just say, it just didn't. Not good...
+
+So just to make sure I wasn't dreaming I validated the code using the friendly <a href="http://html5.validator.nu/">html 5 validator</a> kindly provided and maintained by Henri Sivonen and Simon Pieters along with others of the html5 working group. Once the code was valid it was simple to indulge in some tests to prove the point. 
+
+In the interest of sharing with the web community I detail my tests below and ask am I doing something wrong? Is this a known issue or is this something that will just have to get solved in time by browser suppliers? Or should we land this at the door of the css working group and ask what they make of it?:
+
+<h3>Test 1 - footer</h3>
+
+html code:
+<xmp><!DOCTYPE html>
+<html>
+    <head>
+        <title>html5 footer tag based example</title>
+        <link href="html5-a1.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <footer>
+            <p>&amp;copy; Company Name Here 2009 </p><p>&amp;bull; Built by <a href="http://crataegusdesign.co.uk/" title="Designer Portfolio">Crataegus Design</a> &amp;bull;</p>
+        </footer>
+    </body>
+</html>
+</xmp>
+
+css code:
+<xmp>footer {
+    margin:0 auto;
+    text-align:center;
+    border:1px solid black;
+}
+</xmp>
+
+result:
+<figure>
+    <img src="{{ images_path }}/html5a1ff.gif" alt="test 1 result: screen shot from firefox 3.0.6" title="html5a1ff" width="557" height="188" />
+    <figcaption>test 1 result: screen shot from firefox 3.0.6</figcaption>
+</figure>
+
+Not expected, therefore not good. So, does &lt;p> not know to inherit css behaviour from &lt;footer>? Of course styling the &lt;p> might be a step towards getting the desired result?
+
+<h3>Test 2 - footer + p</h3>
+
+html code as above
+css code:
+<xmp>footer  p{
+    margin:0 auto;
+    text-align:center;
+    border:1px solid black;
+}
+</xmp>
+
+Result - great? except that you will remember that this footer has two paragraphs:
+<figure>
+    <img src="{{ images_path }}/html5a2ff.gif" alt="test 2 screenshot from firefox 3.0.6" title="html5a2ff" width="569" height="90" />
+    <figcaption>test 2 screenshot from firefox 3.0.6</figcaption>
+</figure>
+
+What happens if the footer has more lines of information? Does &lt;section> suffer from the same problem? and is Firefox the only place the problem occurs? 
+
+Tune in next time to see more tales of unexpected output ...

@@ -1,0 +1,52 @@
+<!-- title: HTML5 - the first full implementation -->
+<p>The last few weeks have been stupidly busy with too many changes in focus but one of the most important steps forward has been the first full html5 website I've completed. </p>
+
+	<h2>html5 for the win - well almost</h2>
+<p>Let me qualify that. The site was for a small physiotherapy clinic so this is a public customer site, it has to work and so the live version has been modified to get over IE's little issues with unrecognised elements and css (<a href="http://ejohn.org/blog/html5-shiv/">John Resig</a> has a clear blog article on this). I was really disappointed with having to take backward steps to get it fully working. Instead of being able to rely on <code>header</code>, <code>nav</code>, <code>footer</code> and <code>section</code> to div up my page I had to resort to wrapping these tags in the traditional html4 version <code>div id=""</code> and refering to them in css using the usual <code>#divid</code> syntax.</p>
+
+<p>However, before all the disappointing modifications I managed to get some screenshots from the wonderful people at browsershots.org to give an idea of the take up so far of these new html5 elements in browsers. So for the record ([edit feb2015] original links blitzed):</p>
+
+<h3>The successes:</h3>
+<ul>
+	<li>Firefox 3.0.6 on fedora 7</li>
+	<li>Firefox 3.0.4 on macOS 10.5</li>
+	<li>Firefox 3.1 on windows XP</li>
+</ul>
+<ul>
+	<li>Safari 4 on windows XP</li>
+	<li>Safari 4 on macOS 10.5</li>
+	<li>Safari 3 on windows XP</li>
+	<li>Safari 2.0.4 on macOS 10.5</li>
+</ul>
+<ul>
+	<li>Chrome 1.0.154.48 on windows XP</li>
+	<li>Chrome 2.0.156.1 on windows XP</li>
+</ul>
+<ul>
+	<li>Opera 8.54 on windows XP</li>
+	<li>Opera 9.64 on fedora 7</li>
+	<li>Opera 9.64 on windows XP</li>
+	<li>Opera 10 on ubuntu 8.04</li>
+</ul>
+
+<h3>The failures:</h3>
+<ul>
+	<li><span style="line-height: 1.6471;">MS IE 4.01 on windows XP</span></li>
+	<li>MS IE 5.5 on windows 2000</li>
+	<li>MS IE 6 on windows 2000</li>
+	<li>MS IE 7 on windows XP</li>
+	<li>MS IE 8 on windows XP</li>
+</ul>
+<ul>
+	<li>Firefox 1.5.0.4 on windows XP (partial)*</li>
+	<li><span style="line-height: 1.6471;">Firefox 2.0.0.4 on windows 2000 (partial)*</span></li>
+	<li>Firefox 2.0.0.19 on ubuntu 7.10 (partial)*</li>
+	<li>Firefox 2.0.0.20 on macOS 10.5 (partial)*</li>
+</ul>
+<p>*I think the issue with firefox 1 and 2 is also to do with the way the floats are dealt with rather than just the handling of html5. The white areas signify that the new elements are being recognised if not displayed correctly. They could also be ignoring the declared <code>display:block;</code> in the css.</p>
+
+<h2>An Elegant Solution</h2>
+
+<p>Since putting the modified site live I have discovered the work <a href="http://remysharp.com/2009/01/07/html5-enabling-script/">Remy Sharp</a> has been doing with javascript to get over IE's little problem. The principle is to use javascript to enter the unknown elements (e.g. header) into the IE DOM structure at the start of the page (in the <code>&lt;head&gt;</code> section), which tricks IE into rendering them. This is an ongoing project well worth a look, perhaps this sort of development will help bring the use of html5 in real sites that much closer.</p>
+
+<p>I'll be testing its use on my site and to see that the css for child elements is picked up and shown correctly, and hope to report better overall browser results. I may even be brave enough to get it live - though maybe not on my client's site just yet :)</p>
